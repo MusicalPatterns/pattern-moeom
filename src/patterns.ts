@@ -3,6 +3,7 @@ import { Id, Metadata, PatternFor, Patterns, StandardSpec } from '@musical-patte
 import { buildEntities, buildScales } from './material'
 import { post } from './metadata'
 import { specData } from './specs'
+import { MoeomSpec } from './types'
 
 const material: Material = {
     buildEntitiesFunction: buildEntities,
@@ -17,7 +18,7 @@ const metadata: Metadata = {
     originalPublish: '2018-10-31T07:00:00.000Z',
 }
 
-const pattern: PatternFor<StandardSpec> = {
+const pattern: PatternFor<MoeomSpec> = {
     id: Id.MOEOM,
     material,
     metadata,
