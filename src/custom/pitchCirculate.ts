@@ -5,11 +5,11 @@ import {
     Count,
     Denominator,
     from,
-    HALF,
     Index,
     INITIAL,
     Numerator,
     Offset,
+    ONE_HALF,
     Power,
     Scalar,
     SQUARED,
@@ -20,12 +20,13 @@ import { PITCH_CIRCULAR_OCTAVE_SPAN } from './constants'
 
 const kindaGuessingAtANiceSigma: (steps: Count) => Base =
     (steps: Count): Base =>
-        to.Base(from.Count(apply.Scalar(steps, HALF)))
+        to.Base(from.Count(apply.Scalar(steps, ONE_HALF)))
 
 const mapToPitchCircularGainCurve: (pitchIndex: Index, steps: Count) => Scalar =
     (pitchIndex: Index, steps: Count): Scalar => {
         const totalPitchesWithinSpan: Count = apply.Scalar(steps, to.Scalar(from.Count(PITCH_CIRCULAR_OCTAVE_SPAN)))
-        const pitchWhichIsInTheCenterOfTheSpan: Index = to.Index(from.Count(apply.Scalar(totalPitchesWithinSpan, HALF)))
+        const pitchWhichIsInTheCenterOfTheSpan: Index =
+            to.Index(from.Count(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
         const sigma: Base = kindaGuessingAtANiceSigma(steps)
 
         const normalDistributionPowerNumerator: Numerator =
@@ -47,7 +48,7 @@ const mapToPitchCircularGainCurve: (pitchIndex: Index, steps: Count) => Scalar =
 
         return to.Scalar(apply.Power(
             Math.E,
-            to.Power(-apply.Scalar(normalDistributionPower, HALF)),
+            to.Power(-apply.Scalar(normalDistributionPower, ONE_HALF)),
         ))
     }
 
