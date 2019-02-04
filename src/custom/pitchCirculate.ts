@@ -8,13 +8,13 @@ import {
     HALF,
     Index,
     INITIAL,
-    numbers,
     Numerator,
     Offset,
     Power,
     Scalar,
     SQUARED,
     to,
+    zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
 import { PITCH_CIRCULAR_OCTAVE_SPAN } from './constants'
 
@@ -72,10 +72,9 @@ const oneSpan: (part: NoteSpec[], steps: Count, whichSpan: Index) => NoteSpec[] 
         })
 
 const pitchCirculate: (part: NoteSpec[], steps: Count) => NoteSpec[][] =
-    (part: NoteSpec[], steps: Count): NoteSpec[][] => numbers
-        .slice(from.Index(INITIAL), from.Count(PITCH_CIRCULAR_OCTAVE_SPAN))
-        .map((n: number): number => n - 1)
-        .map((n: number): NoteSpec[] => oneSpan(part, steps, to.Index(n)))
+    (part: NoteSpec[], steps: Count): NoteSpec[][] =>
+        zeroAndPositiveIntegers.slice(from.Index(INITIAL), from.Count(PITCH_CIRCULAR_OCTAVE_SPAN))
+            .map((n: number): NoteSpec[] => oneSpan(part, steps, to.Index(n)))
 
 export {
     pitchCirculate,
