@@ -5,8 +5,8 @@ const buildMoeomScalars: (steps: Count) => Scalar[] =
         const logarithmicStep: Scalar = to.Scalar(from.Base(apply.Power(OCTAVE, to.Power(1 / from.Count(steps)))))
 
         return zeroAndPositiveIntegers.slice(from.Index(INITIAL), from.Count(steps))
-            .map((n: number): Scalar =>
-                apply.Power(logarithmicStep, to.Power(n)))
+            .map((integer: number): Scalar =>
+                apply.Power(logarithmicStep, to.Power(integer)))
     }
 
 export {

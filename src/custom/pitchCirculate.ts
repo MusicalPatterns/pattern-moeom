@@ -75,7 +75,7 @@ const oneSpan: (part: NoteSpec[], steps: Count, whichSpan: Index) => NoteSpec[] 
 const pitchCirculate: (part: NoteSpec[], steps: Count) => NoteSpec[][] =
     (part: NoteSpec[], steps: Count): NoteSpec[][] =>
         zeroAndPositiveIntegers.slice(from.Index(INITIAL), from.Count(PITCH_CIRCULAR_OCTAVE_SPAN))
-            .map((n: number): NoteSpec[] => oneSpan(part, steps, to.Index(n)))
+            .map((integer: number): NoteSpec[] => oneSpan(part, steps, to.Index(integer)))
 
 export {
     pitchCirculate,
