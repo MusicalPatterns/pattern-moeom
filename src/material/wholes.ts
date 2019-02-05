@@ -1,6 +1,6 @@
+import { PitchOnly } from '@musical-patterns/pattern'
 import { ContourWhole, Count, from, INITIAL, sequence, to, zeroAndPositiveIntegers } from '@musical-patterns/utilities'
 import { moeomPiece } from './pieces'
-import { PitchOnly } from './types'
 
 const moeomWhole: (steps: Count) => ContourWhole<PitchOnly> =
     (steps: Count): ContourWhole<PitchOnly> =>

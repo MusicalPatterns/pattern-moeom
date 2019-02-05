@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/pattern-moeom",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@musical-patterns/compiler": "^1.0.85",
-    "@musical-patterns/pattern": "^1.0.149",
+    "@musical-patterns/pattern": "^1.0.150",
     "@musical-patterns/utilities": "^1.0.210"
   },
   "devDependencies": {

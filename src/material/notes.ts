@@ -1,7 +1,6 @@
 import { NoteSpec } from '@musical-patterns/compiler'
-import { STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX, StandardContour } from '@musical-patterns/pattern'
+import { PitchOnly, STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/pattern'
 import { ContourElement, to } from '@musical-patterns/utilities'
-import { PitchOnly } from './types'
 
 const buildNoteSpec: (pitchOnlyContourElement: ContourElement<PitchOnly>) => NoteSpec =
     (pitchOnlyContourElement: ContourElement<PitchOnly>): NoteSpec => ({

@@ -6,7 +6,6 @@ export {
     moeomPiece,
     moeomWhole,
     buildMoeomScalars,
-    PitchOnly,
 } from './material/indexForTest'
 export {
     pitchCirculate,
