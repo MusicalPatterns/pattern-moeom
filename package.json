@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/pattern-moeom",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -8,12 +8,14 @@
     "type": "git",
     "url": "https://github.com/MusicalPatterns/pattern-moeom.git"
   },
-  "devDependencies": {
-    "@musical-patterns/cli": "^1.0.424",
+  "dependencies": {
     "@musical-patterns/compiler": "^1.0.85",
-    "@musical-patterns/pattern": "^1.0.147",
-    "@musical-patterns/playroom": "^1.0.218",
-    "@musical-patterns/snapshot": "^1.0.44",
-    "@musical-patterns/utilities": "^1.0.203"
+    "@musical-patterns/pattern": "^1.0.149",
+    "@musical-patterns/utilities": "^1.0.210"
+  },
+  "devDependencies": {
+    "@musical-patterns/cli": "^1.0.425",
+    "@musical-patterns/playroom": "^1.0.220",
+    "@musical-patterns/snapshot": "^1.0.44"
   }
 }
