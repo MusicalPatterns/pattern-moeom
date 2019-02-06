@@ -2,9 +2,9 @@ import { Scalar, testArraysAreClose, to } from '@musical-patterns/utilities'
 import { buildMoeomScalars } from '../../../src/indexForTest'
 
 describe('scalars', () => {
-    it('divides the window (octave) into equal steps', () => {
+    it('divides the window (octave) into equal divisions', () => {
         testArraysAreClose(
-            buildMoeomScalars(to.Count(12)),
+            buildMoeomScalars(to.Cardinal(12)),
             [
                 1,
                 1.05946309436,
@@ -22,7 +22,7 @@ describe('scalars', () => {
         )
 
         testArraysAreClose(
-            buildMoeomScalars(to.Count(5)),
+            buildMoeomScalars(to.Cardinal(5)),
             [
                 1,
                 1.148698355,

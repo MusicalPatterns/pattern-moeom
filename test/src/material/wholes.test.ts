@@ -3,7 +3,7 @@ import { moeomWhole } from '../../../src/indexForTest'
 
 describe('contour wholes', () => {
     it('a whole sequences blocks [together], one block for each step', () => {
-        expect(moeomWhole(to.Count(12)))
+        expect(moeomWhole(to.Cardinal(12)))
             .toEqual([
                 [ 0 ], [ 0 ], [ 0 ],
                 [ 0 ], [ 1 ], [ 2 ],
@@ -19,7 +19,7 @@ describe('contour wholes', () => {
                 [ 0 ], [ 11 ], [ 22 ],
             ])
 
-        expect(moeomWhole(to.Count(4)))
+        expect(moeomWhole(to.Cardinal(4)))
             .toEqual([
                 [ 0 ], [ 0 ], [ 0 ],
                 [ 0 ], [ 1 ], [ 2 ],

@@ -5,19 +5,19 @@ import {
     standardSpecAttributes,
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
-import { MOEOM_INITIAL_BASE_DURATION, MOEOM_INITIAL_BASE_FREQUENCY, MOEOM_INITIAL_STEPS } from './constants'
+import { MOEOM_INITIAL_BASE_DURATION, MOEOM_INITIAL_BASE_FREQUENCY, MOEOM_INITIAL_EQUAL_DIVISION } from './constants'
 import { MoeomSpec, MoeomSpecAttributes } from './types'
 
 const initial: MoeomSpec = {
     ...standardInitialSpec,
-    steps: MOEOM_INITIAL_STEPS,
+    equalDivision: MOEOM_INITIAL_EQUAL_DIVISION,
     [ StandardSpecProperties.BASE_DURATION ]: MOEOM_INITIAL_BASE_DURATION,
     [ StandardSpecProperties.BASE_FREQUENCY ]: MOEOM_INITIAL_BASE_FREQUENCY,
 }
 
 const attributes: MoeomSpecAttributes = {
     ...standardSpecAttributes,
-    steps: {
+    equalDivision: {
         constraint: {
             integer: true,
             min: 1,

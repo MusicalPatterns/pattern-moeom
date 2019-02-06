@@ -7,7 +7,7 @@ import { moeomWhole } from './wholes'
 
 const buildPart: (spec: MoeomSpec) => NoteSpec[] =
     (spec: MoeomSpec): NoteSpec[] => {
-        const whole: ContourWhole<PitchOnly> = moeomWhole(spec.steps)
+        const whole: ContourWhole<PitchOnly> = moeomWhole(spec.equalDivision)
 
         return whole.map(buildNoteSpec)
     }

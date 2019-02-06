@@ -1,12 +1,12 @@
 import { PitchOnly } from '@musical-patterns/pattern'
-import { apply, ContourWhole, Count, from, to, TWICE } from '@musical-patterns/utilities'
+import { apply, Cardinal, ContourWhole, from, to, TWICE } from '@musical-patterns/utilities'
 
-const moeomPiece: (step: Count) => ContourWhole<PitchOnly> =
-    (step: Count): ContourWhole<PitchOnly> =>
+const moeomPiece: (countOfEqualDivisionSteps: Cardinal) => ContourWhole<PitchOnly> =
+    (countOfEqualDivisionSteps: Cardinal): ContourWhole<PitchOnly> =>
         to.ContourWhole<PitchOnly>([
             [ 0 ],
-            [ from.Count(step) ],
-            [ apply.Scalar(from.Count(step), to.Scalar(from.Count(TWICE))) ],
+            [ from.Cardinal(countOfEqualDivisionSteps) ],
+            [ apply.Scalar(from.Cardinal(countOfEqualDivisionSteps), to.Scalar(from.Cardinal(TWICE))) ],
         ])
 
 export {

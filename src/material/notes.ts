@@ -8,7 +8,7 @@ const buildNoteSpec: (pitchOnlyContourElement: ContourElement<PitchOnly>) => Not
             scaleIndex: STANDARD_DURATIONS_SCALE_INDEX,
         },
         pitchSpec: {
-            index: to.Index(pitchOnlyContourElement[ 0 ]),
+            index: to.Ordinal(pitchOnlyContourElement[ 0 ]),
             scaleIndex: STANDARD_PITCH_SCALE_INDEX,
         },
     })
