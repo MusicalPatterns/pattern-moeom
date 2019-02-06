@@ -10,7 +10,7 @@ const buildEntities: (spec: MoeomSpec) => Entity[] =
         const parts: NoteSpec[][] = pitchCirculate(part, spec.equalDivision)
 
         return parts.map((noteSpecs: NoteSpec[]): Entity => ({
-            noteSpecs,
+            noteSpecs: [],
             timbreName: TimbreNameEnum.TROMBONE,
         }))
     }
