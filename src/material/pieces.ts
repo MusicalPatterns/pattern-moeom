@@ -6,7 +6,7 @@ const moeomPiece: (countOfEqualDivisionSteps: Cardinal) => ContourWhole<PitchOnl
         to.ContourWhole<PitchOnly>([
             [ 0 ],
             [ from.Cardinal(countOfEqualDivisionSteps) ],
-            [ apply.Scalar(from.Cardinal(countOfEqualDivisionSteps), to.Scalar(from.Cardinal(TWICE))) ],
+            [ from.Cardinal(apply.Cardinal(countOfEqualDivisionSteps, TWICE)) ],
         ])
 
 export {

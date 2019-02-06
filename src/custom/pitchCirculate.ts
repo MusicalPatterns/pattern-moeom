@@ -6,6 +6,7 @@ import {
     Denominator,
     from,
     INITIAL,
+    negative,
     Numerator,
     ONE_HALF,
     Ordinal,
@@ -25,22 +26,18 @@ const kindaGuessingAtANiceSigma: (equalDivision: Cardinal) => Base =
 const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Cardinal) => Scalar =
     (pitchIndex: Ordinal, equalDivision: Cardinal): Scalar => {
         const totalPitchesWithinSpan: Cardinal =
-            apply.Scalar(equalDivision, to.Scalar(from.Cardinal(PITCH_CIRCULAR_OCTAVE_SPAN)))
+            apply.Cardinal(equalDivision, PITCH_CIRCULAR_OCTAVE_SPAN)
         const pitchWhichIsInTheCenterOfTheSpan: Ordinal =
             to.Ordinal(from.Cardinal(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
         const sigma: Base = kindaGuessingAtANiceSigma(equalDivision)
 
-        const normalDistributionPowerNumerator: Numerator =
-            to.Numerator(
-                apply.Power(
-                    apply.Translation(
-                        from.Ordinal(pitchIndex),
-                        to.Translation(-from.Ordinal(pitchWhichIsInTheCenterOfTheSpan),
-                        ),
-                    ),
-                    SQUARED,
-                ),
-            )
+        const normalDistributionPowerNumerator: Numerator = to.Numerator(from.Ordinal(apply.Power(
+            apply.Translation(
+                pitchIndex,
+                to.Translation(from.Ordinal(negative(pitchWhichIsInTheCenterOfTheSpan))),
+            ),
+            SQUARED,
+        )))
         const normalDistributionPowerDenominator: Denominator = to.Denominator(from.Base(apply.Power(sigma, SQUARED)))
         const normalDistributionPower: Power = to.Power(
             from.FractionalPart(normalDistributionPowerNumerator) /
@@ -49,7 +46,7 @@ const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Cardinal
 
         return to.Scalar(apply.Power(
             Math.E,
-            to.Power(-apply.Scalar(normalDistributionPower, ONE_HALF)),
+            to.Power(negative(apply.Scalar(normalDistributionPower, ONE_HALF))),
         ))
     }
 
@@ -57,11 +54,11 @@ const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) =
     (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal): NoteSpec[] =>
         part.map((noteSpec: NoteSpec): NoteSpec => {
             const originalIndex: Ordinal = noteSpec.pitchSpec && noteSpec.pitchSpec.index || to.Ordinal(0)
-            const offsetForSpan: Translation =
-                to.Translation(from.Ordinal(apply.Scalar(whichSpan, to.Scalar(from.Cardinal(equalDivision)))))
+            const translationForSpan: Translation =
+                to.Translation(from.Ordinal(apply.Cardinal(whichSpan, equalDivision)))
             const rawCircledPitchIndex: Ordinal =
                 to.Ordinal(from.Ordinal(originalIndex) % from.Cardinal(equalDivision))
-            const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, offsetForSpan)
+            const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
 
             return {
                 ...noteSpec,
