@@ -6,6 +6,7 @@ import {
     OCTAVE,
     reciprocal,
     Scalar,
+    slice,
     to,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
@@ -17,7 +18,7 @@ const buildMoeomScalars: (equalDivision: Cardinal) => Scalar[] =
             to.Power(from.Cardinal(reciprocal(equalDivision))),
         )))
 
-        return zeroAndPositiveIntegers.slice(from.Ordinal(INITIAL), from.Cardinal(equalDivision))
+        return slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(equalDivision)))
             .map((integer: number): Scalar =>
                 apply.Power(logarithmicStep, to.Power(integer)))
     }

@@ -4,6 +4,7 @@ import {
     Base,
     Cardinal,
     Denominator,
+    E,
     from,
     INITIAL,
     negative,
@@ -12,6 +13,7 @@ import {
     Ordinal,
     Power,
     Scalar,
+    slice,
     SQUARED,
     to,
     Translation,
@@ -44,10 +46,10 @@ const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Cardinal
             from.FractionalPart(normalDistributionPowerDenominator),
         )
 
-        return to.Scalar(apply.Power(
-            Math.E,
-            to.Power(negative(apply.Scalar(normalDistributionPower, ONE_HALF))),
-        ))
+        return to.Scalar(from.Base(apply.Power(
+            E,
+            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+        )))
     }
 
 const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) => NoteSpec[] =
@@ -57,7 +59,7 @@ const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) =
             const translationForSpan: Translation =
                 to.Translation(from.Ordinal(apply.Cardinal(whichSpan, equalDivision)))
             const rawCircledPitchIndex: Ordinal =
-                to.Ordinal(from.Ordinal(originalIndex) % from.Cardinal(equalDivision))
+                apply.Modulus(originalIndex, to.Modulus(from.Cardinal(equalDivision)))
             const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
 
             return {
@@ -74,7 +76,7 @@ const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) =
 
 const pitchCirculate: (part: NoteSpec[], equalDivision: Cardinal) => NoteSpec[][] =
     (part: NoteSpec[], equalDivision: Cardinal): NoteSpec[][] =>
-        zeroAndPositiveIntegers.slice(from.Ordinal(INITIAL), from.Cardinal(PITCH_CIRCULAR_OCTAVE_SPAN))
+        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_OCTAVE_SPAN)))
             .map((integer: number): NoteSpec[] => oneSpan(part, equalDivision, to.Ordinal(integer)))
 
 export {
