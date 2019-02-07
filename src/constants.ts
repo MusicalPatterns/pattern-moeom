@@ -1,8 +1,8 @@
 // tslint:disable no-magic-numbers
 
-import { Cardinal, Frequency, Milliseconds, to } from '@musical-patterns/utilities'
+import { Denominator, Frequency, Milliseconds, to } from '@musical-patterns/utilities'
 
-const MOEOM_INITIAL_EQUAL_DIVISION: Cardinal = to.Cardinal(24)
+const MOEOM_INITIAL_EQUAL_DIVISION: Denominator = to.Denominator(24)
 const MOEOM_INITIAL_BASE_DURATION: Milliseconds = to.Milliseconds(240)
 const MOEOM_INITIAL_BASE_FREQUENCY: Frequency = to.Frequency(240)
 

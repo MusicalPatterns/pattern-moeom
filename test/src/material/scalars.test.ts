@@ -1,10 +1,10 @@
-import { Scalar, testArraysAreClose, to } from '@musical-patterns/utilities'
+import { testArraysAreClose, to } from '@musical-patterns/utilities'
 import { buildMoeomScalars } from '../../../src/indexForTest'
 
 describe('scalars', () => {
     it('divides the window (octave) into equal divisions', () => {
         testArraysAreClose(
-            buildMoeomScalars(to.Cardinal(12)),
+            buildMoeomScalars(to.Denominator(12)),
             [
                 1,
                 1.05946309436,
@@ -22,7 +22,7 @@ describe('scalars', () => {
         )
 
         testArraysAreClose(
-            buildMoeomScalars(to.Cardinal(5)),
+            buildMoeomScalars(to.Denominator(5)),
             [
                 1,
                 1.148698355,

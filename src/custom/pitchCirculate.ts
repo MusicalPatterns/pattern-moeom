@@ -2,7 +2,6 @@ import { NoteSpec } from '@musical-patterns/compiler'
 import {
     apply,
     Base,
-    Cardinal,
     Denominator,
     E,
     from,
@@ -19,18 +18,18 @@ import {
     Translation,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
-import { PITCH_CIRCULAR_OCTAVE_SPAN } from './constants'
+import { PITCH_CIRCULAR_WINDOW_COUNT } from './constants'
 
-const kindaGuessingAtANiceSigma: (equalDivision: Cardinal) => Base =
-    (equalDivision: Cardinal): Base =>
-        to.Base(from.Cardinal(apply.Scalar(equalDivision, ONE_HALF)))
+const kindaGuessingAtANiceSigma: (equalDivision: Denominator) => Base =
+    (equalDivision: Denominator): Base =>
+        to.Base(from.FractionalPart(apply.Scalar(equalDivision, ONE_HALF)))
 
-const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Cardinal) => Scalar =
-    (pitchIndex: Ordinal, equalDivision: Cardinal): Scalar => {
-        const totalPitchesWithinSpan: Cardinal =
-            apply.Cardinal(equalDivision, PITCH_CIRCULAR_OCTAVE_SPAN)
+const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denominator) => Scalar =
+    (pitchIndex: Ordinal, equalDivision: Denominator): Scalar => {
+        const totalPitchesWithinSpan: Denominator =
+            apply.Cardinal(equalDivision, PITCH_CIRCULAR_WINDOW_COUNT)
         const pitchWhichIsInTheCenterOfTheSpan: Ordinal =
-            to.Ordinal(from.Cardinal(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
+            to.Ordinal(from.FractionalPart(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
         const sigma: Base = kindaGuessingAtANiceSigma(equalDivision)
 
         const normalDistributionPowerNumerator: Numerator = to.Numerator(from.Ordinal(apply.Power(
@@ -52,14 +51,14 @@ const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Cardinal
         )))
     }
 
-const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) => NoteSpec[] =
-    (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal): NoteSpec[] =>
+const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordinal) => NoteSpec[] =
+    (part: NoteSpec[], equalDivision: Denominator, whichSpan: Ordinal): NoteSpec[] =>
         part.map((noteSpec: NoteSpec): NoteSpec => {
             const originalIndex: Ordinal = noteSpec.pitchSpec && noteSpec.pitchSpec.index || to.Ordinal(0)
             const translationForSpan: Translation =
-                to.Translation(from.Ordinal(apply.Cardinal(whichSpan, equalDivision)))
+                to.Translation(from.Ordinal(apply.Cardinal(whichSpan, to.Cardinal(from.FractionalPart(equalDivision)))))
             const rawCircledPitchIndex: Ordinal =
-                apply.Modulus(originalIndex, to.Modulus(from.Cardinal(equalDivision)))
+                apply.Modulus(originalIndex, to.Modulus(from.FractionalPart(equalDivision)))
             const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
 
             return {
@@ -74,10 +73,10 @@ const oneSpan: (part: NoteSpec[], equalDivision: Cardinal, whichSpan: Ordinal) =
             }
         })
 
-const pitchCirculate: (part: NoteSpec[], equalDivision: Cardinal) => NoteSpec[][] =
-    (part: NoteSpec[], equalDivision: Cardinal): NoteSpec[][] =>
-        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_OCTAVE_SPAN)))
-            .map((integer: number): NoteSpec[] => oneSpan(part, equalDivision, to.Ordinal(integer)))
+const pitchCirculate: (part: NoteSpec[], equalDivision: Denominator) => NoteSpec[][] =
+    (part: NoteSpec[], equalDivision: Denominator): NoteSpec[][] =>
+        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_WINDOW_COUNT)))
+            .map((windowIndex: number): NoteSpec[] => window(part, equalDivision, to.Ordinal(windowIndex)))
 
 export {
     pitchCirculate,

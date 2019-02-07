@@ -1,8 +1,8 @@
 import { RangedSpecPropertyAttributes, Spec, SpecAttributes } from '@musical-patterns/pattern'
-import { Cardinal } from '@musical-patterns/utilities'
+import { Denominator } from '@musical-patterns/utilities'
 
 interface MoeomSpec extends Spec {
-    equalDivision: Cardinal,
+    equalDivision: Denominator,
 }
 
 interface MoeomSpecAttributes extends SpecAttributes {

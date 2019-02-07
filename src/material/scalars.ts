@@ -1,6 +1,6 @@
 import {
     apply,
-    Cardinal,
+    Denominator,
     from,
     INITIAL,
     OCTAVE,
@@ -11,14 +11,14 @@ import {
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
 
-const buildMoeomScalars: (equalDivision: Cardinal) => Scalar[] =
-    (equalDivision: Cardinal): Scalar[] => {
+const buildMoeomScalars: (equalDivision: Denominator) => Scalar[] =
+    (equalDivision: Denominator): Scalar[] => {
         const logarithmicStep: Scalar = to.Scalar(from.Base(apply.Power(
             OCTAVE,
-            to.Power(from.Cardinal(reciprocal(equalDivision))),
+            to.Power(from.FractionalPart(reciprocal(equalDivision))),
         )))
 
-        return slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(equalDivision)))
+        return slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.FractionalPart(equalDivision)))
             .map((integer: number): Scalar =>
                 apply.Power(logarithmicStep, to.Power(integer)))
     }

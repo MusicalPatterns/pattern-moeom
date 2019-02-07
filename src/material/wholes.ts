@@ -1,9 +1,10 @@
 import { PitchOnly } from '@musical-patterns/pattern'
 import {
-    Cardinal,
     ContourWhole,
+    Denominator,
     from,
     INITIAL,
+    Numerator,
     sequence,
     slice,
     to,
@@ -11,15 +12,15 @@ import {
 } from '@musical-patterns/utilities'
 import { moeomPiece } from './pieces'
 
-const moeomWhole: (equalDivision: Cardinal) => ContourWhole<PitchOnly> =
-    (equalDivision: Cardinal): ContourWhole<PitchOnly> =>
-        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(equalDivision)))
-            .map(to.Cardinal)
+const moeomWhole: (equalDivision: Denominator) => ContourWhole<PitchOnly> =
+    (equalDivision: Denominator): ContourWhole<PitchOnly> =>
+        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.FractionalPart(equalDivision)))
+            .map(to.Numerator)
             .reduce(
-                (accumulator: ContourWhole<PitchOnly>, countOfEqualDivisionSteps: Cardinal): ContourWhole<PitchOnly> =>
+                (accumulator: ContourWhole<PitchOnly>, equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>
                     to.ContourWhole<PitchOnly>(sequence([
                         accumulator,
-                        moeomPiece(countOfEqualDivisionSteps),
+                        moeomPiece(equalDivisionStep),
                     ])),
                 to.ContourWhole<PitchOnly>([]),
             )
