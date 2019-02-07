@@ -1,10 +1,11 @@
+import { PitchOnly } from '@musical-patterns/pattern'
 import { to } from '@musical-patterns/utilities'
 import { moeomWhole } from '../../../src/indexForTest'
 
 describe('contour wholes', () => {
     it('a whole sequences blocks [together], one block for each step', () => {
         expect(moeomWhole(to.Denominator(12)))
-            .toEqual([
+            .toEqual(to.ContourWhole<PitchOnly>([
                 [ 0 ], [ 0 ], [ 0 ],
                 [ 0 ], [ 1 ], [ 2 ],
                 [ 0 ], [ 2 ], [ 4 ],
@@ -17,14 +18,14 @@ describe('contour wholes', () => {
                 [ 0 ], [ 9 ], [ 18 ],
                 [ 0 ], [ 10 ], [ 20 ],
                 [ 0 ], [ 11 ], [ 22 ],
-            ])
+            ]))
 
         expect(moeomWhole(to.Denominator(4)))
-            .toEqual([
+            .toEqual(to.ContourWhole<PitchOnly>([
                 [ 0 ], [ 0 ], [ 0 ],
                 [ 0 ], [ 1 ], [ 2 ],
                 [ 0 ], [ 2 ], [ 4 ],
                 [ 0 ], [ 3 ], [ 6 ],
-            ])
+            ]))
     })
 })

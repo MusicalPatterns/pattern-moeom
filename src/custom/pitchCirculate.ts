@@ -24,8 +24,8 @@ const kindaGuessingAtANiceSigma: (equalDivision: Denominator) => Base =
     (equalDivision: Denominator): Base =>
         to.Base(from.FractionalPart(apply.Scalar(equalDivision, ONE_HALF)))
 
-const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denominator) => Scalar =
-    (pitchIndex: Ordinal, equalDivision: Denominator): Scalar => {
+const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar) => Scalar =
+    (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar): Scalar => {
         const totalPitchesWithinSpan: Denominator =
             apply.Cardinal(equalDivision, PITCH_CIRCULAR_WINDOW_COUNT)
         const pitchWhichIsInTheCenterOfTheSpan: Ordinal =
@@ -45,10 +45,13 @@ const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denomina
             from.FractionalPart(normalDistributionPowerDenominator),
         )
 
-        return to.Scalar(from.Base(apply.Power(
-            E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
-        )))
+        return apply.Scalar(
+            originalScalar,
+            to.Scalar(from.Base(apply.Power(
+                E,
+                negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+            ))),
+        )
     }
 
 const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordinal) => NoteSpec[] =
@@ -60,11 +63,12 @@ const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordina
             const rawCircledPitchIndex: Ordinal =
                 apply.Modulus(originalIndex, to.Modulus(from.FractionalPart(equalDivision)))
             const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
+            const originalScalar: Scalar = noteSpec.gainSpec && noteSpec.gainSpec.scalar || to.Scalar(1)
 
             return {
                 ...noteSpec,
                 gainSpec: {
-                    scalar: mapToPitchCircularGainCurve(circledPitchIndex, equalDivision),
+                    scalar: mapToPitchCircularGainCurve(circledPitchIndex, equalDivision, originalScalar),
                 },
                 pitchSpec: {
                     ...noteSpec.pitchSpec,
