@@ -5,7 +5,11 @@ import {
     standardSpecAttributes,
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
-import { MOEOM_INITIAL_BASE_DURATION, MOEOM_INITIAL_BASE_FREQUENCY, MOEOM_INITIAL_EQUAL_DIVISION } from './constants'
+import {
+    MOEOM_INITIAL_BASE_DURATION,
+    MOEOM_INITIAL_BASE_FREQUENCY,
+    MOEOM_INITIAL_EQUAL_DIVISION,
+} from './constants'
 import { MoeomSpec, MoeomSpecAttributes } from './types'
 
 const initial: MoeomSpec = {
