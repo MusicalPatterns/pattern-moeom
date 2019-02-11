@@ -14,7 +14,7 @@ import { moeomPiece } from './pieces'
 
 const moeomWhole: (equalDivision: Denominator) => ContourWhole<PitchOnly> =
     (equalDivision: Denominator): ContourWhole<PitchOnly> =>
-        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.FractionalPart(equalDivision)))
+        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Denominator(equalDivision)))
             .map(to.Numerator)
             .reduce(
                 (accumulator: ContourWhole<PitchOnly>, equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>

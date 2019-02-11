@@ -5,8 +5,8 @@ const moeomPiece: (equalDivisionStep: Numerator) => ContourWhole<PitchOnly> =
     (equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>
         to.ContourWhole<PitchOnly>([
             [ 0 ],
-            [ from.FractionalPart(equalDivisionStep) ],
-            [ from.FractionalPart(apply.Cardinal(equalDivisionStep, TWICE)) ],
+            [ from.Numerator(equalDivisionStep) ],
+            [ from.Numerator(apply.Cardinal(equalDivisionStep, TWICE)) ],
         ])
 
 export {
