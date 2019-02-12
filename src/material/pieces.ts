@@ -6,7 +6,7 @@ const moeomPiece: (equalDivisionStep: Numerator) => ContourWhole<PitchOnly> =
         to.ContourWhole<PitchOnly>([
             [ 0 ],
             [ from.Numerator(equalDivisionStep) ],
-            [ from.Numerator(apply.Cardinal(equalDivisionStep, TWICE)) ],
+            [ from.Numerator(apply.Scalar(equalDivisionStep, to.Scalar(from.Cardinal(TWICE)))) ],
         ])
 
 export {

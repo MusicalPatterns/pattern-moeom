@@ -14,9 +14,10 @@ import {
 
 const buildMoeomScalars: (equalDivision: Denominator) => Scalar[] =
     (equalDivision: Denominator): Scalar[] => {
+        const division: number = from.Denominator(reciprocal(equalDivision))
         const logarithmicStep: Scalar = to.Scalar(from.Base(apply.Power(
             OCTAVE,
-            to.Power(from.Denominator(reciprocal(equalDivision))),
+            to.Power(division),
         )))
 
         return slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Denominator(equalDivision)))

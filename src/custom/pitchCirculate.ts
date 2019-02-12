@@ -27,7 +27,7 @@ const kindaGuessingAtANiceSigma: (equalDivision: Denominator) => Base =
 const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar) => Scalar =
     (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar): Scalar => {
         const totalPitchesWithinSpan: Denominator =
-            apply.Cardinal(equalDivision, PITCH_CIRCULAR_WINDOW_COUNT)
+            apply.Scalar(equalDivision, to.Scalar(from.Cardinal(PITCH_CIRCULAR_WINDOW_COUNT)))
         const pitchWhichIsInTheCenterOfTheSpan: Ordinal =
             to.Ordinal(from.Denominator(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
         const sigma: Base = kindaGuessingAtANiceSigma(equalDivision)
@@ -45,23 +45,25 @@ const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denomina
             from.Denominator(normalDistributionPowerDenominator),
         )
 
-        return apply.Scalar(
-            originalScalar,
-            to.Scalar(from.Base(apply.Power(
-                E,
-                negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
-            ))),
-        )
+        const pitchCircularScaling: number = from.Base(apply.Power(
+            E,
+            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+        ))
+
+        return apply.Scalar(originalScalar, to.Scalar(pitchCircularScaling))
     }
 
 const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordinal) => NoteSpec[] =
     (part: NoteSpec[], equalDivision: Denominator, whichSpan: Ordinal): NoteSpec[] =>
         part.map((noteSpec: NoteSpec): NoteSpec => {
             const originalIndex: Ordinal = noteSpec.pitchSpec && noteSpec.pitchSpec.index || to.Ordinal(0)
-            const translationForSpan: Translation =
-                to.Translation(from.Ordinal(apply.Cardinal(whichSpan, to.Cardinal(from.Denominator(equalDivision)))))
+            const division: number = from.Denominator(equalDivision)
+            const translationForSpan: Translation = to.Translation(from.Ordinal(apply.Scalar(
+                whichSpan,
+                to.Scalar(division),
+            )))
             const rawCircledPitchIndex: Ordinal =
-                apply.Modulus(originalIndex, to.Modulus(from.Denominator(equalDivision)))
+                apply.Modulus(originalIndex, to.Modulus(division))
             const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
             const originalScalar: Scalar = noteSpec.gainSpec && noteSpec.gainSpec.scalar || to.Scalar(1)
 
