@@ -82,7 +82,8 @@ const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordina
 const pitchCirculate: (part: NoteSpec[], equalDivision: Denominator) => NoteSpec[][] =
     (part: NoteSpec[], equalDivision: Denominator): NoteSpec[][] =>
         slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_WINDOW_COUNT)))
-            .map((windowIndex: number): NoteSpec[] => window(part, equalDivision, to.Ordinal(windowIndex)))
+            .map(to.Ordinal)
+            .map((windowIndex: Ordinal): NoteSpec[] => window(part, equalDivision, windowIndex))
 
 export {
     pitchCirculate,
