@@ -10,17 +10,18 @@ import {
     to,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
+import { MoeomSpec } from '../types'
 import { moeomPiece } from './pieces'
 
-const moeomWhole: (equalDivision: Denominator) => ContourWhole<PitchOnly> =
-    (equalDivision: Denominator): ContourWhole<PitchOnly> =>
+const moeomWhole: (spec: MoeomSpec) => ContourWhole<PitchOnly> =
+    ({ equalDivision, flipped }: MoeomSpec): ContourWhole<PitchOnly> =>
         slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Denominator(equalDivision)))
             .map(to.Numerator)
             .reduce(
                 (accumulator: ContourWhole<PitchOnly>, equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>
                     to.ContourWhole<PitchOnly>(sequence([
                         accumulator,
-                        moeomPiece(equalDivisionStep),
+                        moeomPiece({ equalDivisionStep, flipped }),
                     ])),
                 to.ContourWhole<PitchOnly>([]),
             )
