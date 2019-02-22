@@ -5,7 +5,6 @@ export { pattern } from './patterns'
 export {
     moeomPiece,
     moeomWhole,
-    buildMoeomScalars,
 } from './material/indexForTest'
 export {
     pitchCirculate,

@@ -4,9 +4,8 @@ import {
     generateOctaveRepeatingScalars,
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
-import { from, NO_TRANSLATION, Scalar, to, Translation } from '@musical-patterns/utilities'
+import { buildEqualDivisionScalars, from, NO_TRANSLATION, Scalar, to, Translation } from '@musical-patterns/utilities'
 import { MoeomSpec } from '../types'
-import { buildMoeomScalars } from './scalars'
 
 const buildScales: BuildScalesFunction =
     (spec: MoeomSpec): Scale[] => {
@@ -28,7 +27,7 @@ const buildScales: BuildScalesFunction =
             from.Hz(spec[ StandardSpecProperties.FREQUENCY_TRANSLATION ] || to.Hz(NO_TRANSLATION))
         const pitchesScale: Scale = {
             scalar: pitchesScalar,
-            scalars: generateOctaveRepeatingScalars(buildMoeomScalars(spec.equalDivision)),
+            scalars: generateOctaveRepeatingScalars(buildEqualDivisionScalars(spec.equalDivision)),
             translation: pitchesTranslation,
         }
 
