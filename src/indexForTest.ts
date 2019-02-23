@@ -5,10 +5,8 @@ export { pattern } from './patterns'
 export {
     moeomPiece,
     moeomWhole,
-} from './material/indexForTest'
-export {
     pitchCirculate,
-} from './custom/pitchCirculate'
+} from './material/indexForTest'
 
 // tslint:disable-next-line no-default-import
 import * as snapshot from './snapshot.json'
