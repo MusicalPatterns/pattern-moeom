@@ -1,7 +1,7 @@
 import { NoteSpec } from '@musical-patterns/compiler'
 import { STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/pattern'
 import { apply, Scalar, testIsCloseTo, to } from '@musical-patterns/utilities'
-import { pitchCirculate } from '../../../src/indexForTest'
+import { pitchCirculate } from '../../../../src/indexForTest'
 
 describe('pitch circulate', () => {
     let outputParts: NoteSpec[][]
