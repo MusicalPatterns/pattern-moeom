@@ -5,7 +5,7 @@ import {
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
 import { buildEqualDivisionScalars, from, NO_TRANSLATION, Scalar, to, Translation } from '@musical-patterns/utilities'
-import { MoeomSpec } from '../types'
+import { MoeomSpec } from '../spec'
 
 const buildScales: BuildScalesFunction =
     (spec: MoeomSpec): Scale[] => {

@@ -10,7 +10,7 @@ import {
     to,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
-import { MoeomSpec } from '../types'
+import { MoeomSpec } from '../spec'
 import { moeomPiece } from './pieces'
 
 const moeomWhole: (spec: MoeomSpec) => ContourWhole<PitchOnly> =

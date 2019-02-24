@@ -1,7 +1,7 @@
 import { NoteSpec } from '@musical-patterns/compiler'
 import { PitchOnly } from '@musical-patterns/pattern'
 import { ContourWhole } from '@musical-patterns/utilities'
-import { MoeomSpec } from '../types'
+import { MoeomSpec } from '../spec'
 import { buildNoteSpec } from './notes'
 import { moeomWhole } from './wholes'
 

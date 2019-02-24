@@ -1,5 +1,5 @@
 import { Entity, NoteSpec, TimbreNameEnum } from '@musical-patterns/compiler'
-import { MoeomSpec } from '../types'
+import { MoeomSpec } from '../spec'
 import { pitchCirculate } from './custom'
 import { buildPart } from './parts'
 
