@@ -1,6 +1,6 @@
 import {
     RangedSpecPropertyAttributes,
-    SpecAttributesFor,
+    SpecAttributes,
     StandardSpec,
     ToggledSpecPropertyAttributes,
 } from '@musical-patterns/pattern'
@@ -11,7 +11,7 @@ interface MoeomSpec extends StandardSpec {
     flipped: boolean,
 }
 
-interface MoeomSpecAttributes extends SpecAttributesFor<MoeomSpec> {
+interface MoeomSpecAttributes extends SpecAttributes<MoeomSpec> {
     equalDivision: RangedSpecPropertyAttributes,
     flipped: ToggledSpecPropertyAttributes,
 }

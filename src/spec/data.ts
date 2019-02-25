@@ -1,5 +1,5 @@
 import {
-    SpecDataFor,
+    SpecData,
     SpecPropertyType,
     standardInitialSpec,
     standardSpecAttributes,
@@ -35,7 +35,7 @@ const attributes: MoeomSpecAttributes = {
     },
 }
 
-const specData: SpecDataFor<MoeomSpec> = {
+const specData: SpecData<MoeomSpec> = {
     attributes,
     initial,
 }
