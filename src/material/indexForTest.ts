@@ -4,4 +4,5 @@ export { moeomPiece } from './pieces'
 export { moeomWhole } from './wholes'
 export {
     pitchCirculate,
-} from './custom/pitchCirculate'
+    PitchCircularTechnique,
+} from './custom/indexForTest'

@@ -1,7 +1,10 @@
+// tslint:disable max-file-line-count
+
 import { NoteSpec } from '@musical-patterns/compiler'
 import {
     apply,
     Base,
+    Cardinal,
     Denominator,
     E,
     from,
@@ -18,59 +21,102 @@ import {
     Translation,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
-import { PITCH_CIRCULAR_WINDOW_COUNT } from './constants'
+import { PITCH_CIRCULAR_TIER_COUNT } from './constants'
+import {
+    ApplyPitchCircularGainCurveParameters,
+    CalculateCircledPitchIndexParameters,
+    PitchCirculateOptions,
+} from './types'
 
-const kindaGuessingAtANiceSigma: (equalDivision: Denominator) => Base =
-    (equalDivision: Denominator): Base =>
-        to.Base(from.Denominator(apply.Scalar(equalDivision, ONE_HALF)))
-
-const mapToPitchCircularGainCurve: (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar) => Scalar =
-    (pitchIndex: Ordinal, equalDivision: Denominator, originalScalar: Scalar): Scalar => {
-        const totalPitchesWithinSpan: Denominator =
-            apply.Scalar(equalDivision, to.Scalar(from.Cardinal(PITCH_CIRCULAR_WINDOW_COUNT)))
-        const pitchWhichIsInTheCenterOfTheSpan: Ordinal =
-            to.Ordinal(from.Denominator(apply.Scalar(totalPitchesWithinSpan, ONE_HALF)))
-        const sigma: Base = kindaGuessingAtANiceSigma(equalDivision)
-
-        const normalDistributionPowerNumerator: Numerator = to.Numerator(from.Ordinal(apply.Power(
-            apply.Translation(
-                pitchIndex,
-                to.Translation(from.Ordinal(negative(pitchWhichIsInTheCenterOfTheSpan))),
-            ),
-            SQUARED,
+const calculateNumeratorOfPowerOfNormalDistribution: (parameters: ApplyPitchCircularGainCurveParameters) => Numerator =
+    ({ pitchClassCount, circledPitchIndex }: ApplyPitchCircularGainCurveParameters): Numerator => {
+        const totalPitchesAcrossAllTiers: Cardinal = apply.Scalar(
+            pitchClassCount,
+            to.Scalar(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)),
+        )
+        const indexOfPitchInTheCenterOfAllTiers: Ordinal = to.Ordinal(from.Cardinal(apply.Scalar(
+            totalPitchesAcrossAllTiers,
+            ONE_HALF,
         )))
-        const normalDistributionPowerDenominator: Denominator = to.Denominator(from.Base(apply.Power(sigma, SQUARED)))
-        const normalDistributionPower: Power = to.Power(
-            from.Numerator(normalDistributionPowerNumerator) /
-            from.Denominator(normalDistributionPowerDenominator),
+        const indexTranslatedSuchThatItIsPositiveIfGreaterThanTheMiddleAndNegativeIfLesser: Ordinal = apply.Translation(
+            circledPitchIndex,
+            to.Translation(from.Ordinal(negative(indexOfPitchInTheCenterOfAllTiers))),
         )
 
-        const pitchCircularScaling: number = from.Base(apply.Power(
-            E,
-            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
-        ))
-
-        return apply.Scalar(originalScalar, to.Scalar(pitchCircularScaling))
+        return to.Numerator(from.Ordinal(apply.Power(
+            indexTranslatedSuchThatItIsPositiveIfGreaterThanTheMiddleAndNegativeIfLesser,
+            SQUARED,
+        )))
     }
 
-const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordinal) => NoteSpec[] =
-    (part: NoteSpec[], equalDivision: Denominator, whichSpan: Ordinal): NoteSpec[] =>
+const calculateDenominatorOfPowerOfNormalDistribution:
+    (parameters: ApplyPitchCircularGainCurveParameters) => Denominator =
+    ({ pitchClassCount }: ApplyPitchCircularGainCurveParameters): Denominator => {
+        const sigma: Base = to.Base(from.Cardinal(apply.Scalar(pitchClassCount, ONE_HALF)))
+
+        return to.Denominator(from.Base(apply.Power(sigma, SQUARED)))
+    }
+
+const calculatePowerOfNormalDistribution: (parameters: ApplyPitchCircularGainCurveParameters) => Power =
+    (parameters: ApplyPitchCircularGainCurveParameters): Power =>
+        to.Power(from.Fraction([
+            calculateNumeratorOfPowerOfNormalDistribution(parameters),
+            calculateDenominatorOfPowerOfNormalDistribution(parameters),
+        ]))
+
+const applyPitchCircularGainCurve:
+    (originalGainScalar: Scalar, parameters: ApplyPitchCircularGainCurveParameters) => Scalar =
+    (originalGainScalar: Scalar, parameters: ApplyPitchCircularGainCurveParameters): Scalar => {
+        const normalDistributionPower: Power = calculatePowerOfNormalDistribution(parameters)
+
+        const pitchCircularScaling: Scalar = to.Scalar(from.Base(apply.Power(
+            E,
+            negative(apply.Scalar(normalDistributionPower, ONE_HALF)),
+        )))
+
+        return apply.Scalar(originalGainScalar, pitchCircularScaling)
+    }
+
+const transposePitchIndexForTier:
+    (originalPitchIndex: Ordinal, parameters: CalculateCircledPitchIndexParameters) => Ordinal =
+    (originalPitchIndex: Ordinal, { pitchClassCount, tierIndex }: CalculateCircledPitchIndexParameters): Ordinal => {
+        const pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation: Ordinal = apply.Modulus(
+            originalPitchIndex,
+            to.Modulus(from.Cardinal(pitchClassCount)),
+        )
+
+        const baseTierTransposition: Translation = to.Translation(from.Ordinal(apply.Scalar(
+            tierIndex,
+            to.Scalar(from.Cardinal(pitchClassCount)),
+        )))
+
+        return apply.Translation(
+            pitchIndexWrappedWithinPitchClassCountToRemoveOriginalWindowLocationInformation,
+            baseTierTransposition,
+        )
+    }
+
+const buildTierWithTechniqueIndexTranslationByPitchClassCount:
+    (part: NoteSpec[], tierIndex: Ordinal, pitchClassCount: Cardinal) => NoteSpec[] =
+    (part: NoteSpec[], tierIndex: Ordinal, pitchClassCount: Cardinal): NoteSpec[] =>
         part.map((noteSpec: NoteSpec): NoteSpec => {
-            const originalIndex: Ordinal = noteSpec.pitchSpec && noteSpec.pitchSpec.index || to.Ordinal(0)
-            const division: number = from.Denominator(equalDivision)
-            const translationForSpan: Translation = to.Translation(from.Ordinal(apply.Scalar(
-                whichSpan,
-                to.Scalar(division),
-            )))
-            const rawCircledPitchIndex: Ordinal =
-                apply.Modulus(originalIndex, to.Modulus(division))
-            const circledPitchIndex: Ordinal = apply.Translation(rawCircledPitchIndex, translationForSpan)
-            const originalScalar: Scalar = noteSpec.gainSpec && noteSpec.gainSpec.scalar || to.Scalar(1)
+            const originalPitchIndex: Ordinal = noteSpec.pitchSpec && noteSpec.pitchSpec.index || to.Ordinal(0)
+            const originalGainScalar: Scalar = noteSpec.gainSpec && noteSpec.gainSpec.scalar || to.Scalar(1)
+
+            const circledPitchIndex: Ordinal = transposePitchIndexForTier(
+                originalPitchIndex,
+                { pitchClassCount, tierIndex },
+            )
+
+            const pitchCircledGainScalar: Scalar = applyPitchCircularGainCurve(
+                originalGainScalar,
+                { circledPitchIndex, pitchClassCount },
+            )
 
             return {
                 ...noteSpec,
                 gainSpec: {
-                    scalar: mapToPitchCircularGainCurve(circledPitchIndex, equalDivision, originalScalar),
+                    scalar: pitchCircledGainScalar,
                 },
                 pitchSpec: {
                     ...noteSpec.pitchSpec,
@@ -79,11 +125,13 @@ const window: (part: NoteSpec[], equalDivision: Denominator, windowIndex: Ordina
             }
         })
 
-const pitchCirculate: (part: NoteSpec[], equalDivision: Denominator) => NoteSpec[][] =
-    (part: NoteSpec[], equalDivision: Denominator): NoteSpec[][] =>
-        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_WINDOW_COUNT)))
+const pitchCirculate: (part: NoteSpec[], pitchCirculateOptions: PitchCirculateOptions) => NoteSpec[][] =
+    (part: NoteSpec[], { pitchClassCount = to.Cardinal(0) }: PitchCirculateOptions): NoteSpec[][] =>
+        slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Cardinal(PITCH_CIRCULAR_TIER_COUNT)))
             .map(to.Ordinal)
-            .map((windowIndex: Ordinal): NoteSpec[] => window(part, equalDivision, windowIndex))
+            .map((tierIndex: Ordinal): NoteSpec[] =>
+                buildTierWithTechniqueIndexTranslationByPitchClassCount(part, tierIndex, pitchClassCount),
+            )
 
 export {
     pitchCirculate,

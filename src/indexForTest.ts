@@ -6,6 +6,7 @@ export {
     moeomPiece,
     moeomWhole,
     pitchCirculate,
+    PitchCircularTechnique,
 } from './material/indexForTest'
 
 // tslint:disable-next-line no-default-import

@@ -1,7 +1,7 @@
 import { NoteSpec } from '@musical-patterns/compiler'
 import { STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/pattern'
 import { apply, Scalar, testIsCloseTo, to } from '@musical-patterns/utilities'
-import { pitchCirculate } from '../../../../src/indexForTest'
+import { PitchCircularTechnique, pitchCirculate } from '../../../../src/indexForTest'
 
 describe('pitch circulate', () => {
     let outputParts: NoteSpec[][]
@@ -24,7 +24,13 @@ describe('pitch circulate', () => {
                 },
             ]
 
-            outputParts = pitchCirculate(inputPart, to.Denominator(12))
+            outputParts = pitchCirculate(
+                inputPart,
+                {
+                    pitchClassCount: to.Cardinal(12),
+                    technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
+                },
+            )
         })
 
         it('scales the gain, so that the center part is loud, and the outer parts get quieter depending on how far from the center they are', () => {
@@ -94,7 +100,13 @@ describe('pitch circulate', () => {
                 { pitchSpec: { index: to.Ordinal(12) } },
             ]
 
-            outputParts = pitchCirculate(inputPart, to.Denominator(12))
+            outputParts = pitchCirculate(
+                inputPart,
+                {
+                    pitchClassCount: to.Cardinal(12),
+                    technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
+                },
+            )
         })
 
         it('it should return the same result after one loop around the pitch classes', () => {
