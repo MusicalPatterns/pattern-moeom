@@ -116,6 +116,7 @@ const buildTierWithTechniqueIndexTranslationByPitchClassCount:
             return {
                 ...noteSpec,
                 gainSpec: {
+                    ...noteSpec.gainSpec,
                     scalar: pitchCircledGainScalar,
                 },
                 pitchSpec: {
