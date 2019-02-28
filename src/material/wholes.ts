@@ -1,7 +1,6 @@
 import { PitchOnly } from '@musical-patterns/pattern'
 import {
     ContourWhole,
-    Denominator,
     from,
     INITIAL,
     Numerator,
