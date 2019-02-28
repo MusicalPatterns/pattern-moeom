@@ -2,7 +2,3 @@
 
 export { moeomPiece } from './pieces'
 export { moeomWhole } from './wholes'
-export {
-    pitchCirculate,
-    PitchCircularTechnique,
-} from './custom/indexForTest'

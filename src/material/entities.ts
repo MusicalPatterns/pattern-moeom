@@ -1,7 +1,7 @@
 import { Entity, NoteSpec, TimbreNameEnum } from '@musical-patterns/compiler'
+import { PitchCircularTechnique, pitchCirculate } from '@musical-patterns/pattern'
 import { from, to } from '@musical-patterns/utilities'
 import { MoeomSpec } from '../spec'
-import { PitchCircularTechnique, pitchCirculate } from './custom'
 import { buildPart } from './parts'
 
 const buildEntities: (spec: MoeomSpec) => Entity[] =
