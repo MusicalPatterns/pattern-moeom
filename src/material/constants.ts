@@ -1,4 +1,4 @@
-// tslint:disable:no-magic-numbers
+// tslint:disable no-magic-numbers
 
 import { Amplitude, ONE_FOURTH, Scalar, to } from '@musical-patterns/utilities'
 
