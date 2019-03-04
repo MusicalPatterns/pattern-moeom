@@ -3,8 +3,8 @@ import { PitchOnly, STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX }
 import { ContourElement, from, Scalar, to } from '@musical-patterns/utilities'
 import { REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD } from './constants'
 
-const buildNoteSpec: (pitchOnlyContourElement: ContourElement<PitchOnly>) => NoteSpec =
-    (pitchOnlyContourElement: ContourElement<PitchOnly>): NoteSpec => ({
+const buildNoteSpec: (contourElement: ContourElement<PitchOnly>) => NoteSpec =
+    ([ pitch ]: ContourElement<PitchOnly>): NoteSpec => ({
         durationSpec: {
             scaleIndex: STANDARD_DURATIONS_SCALE_INDEX,
         },
@@ -12,7 +12,7 @@ const buildNoteSpec: (pitchOnlyContourElement: ContourElement<PitchOnly>) => Not
             scalar: from.Amplitude(REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD) as Scalar,
         },
         pitchSpec: {
-            index: to.Ordinal(pitchOnlyContourElement[ 0 ]),
+            index: to.Ordinal(pitch),
             scaleIndex: STANDARD_PITCH_SCALE_INDEX,
         },
     })
