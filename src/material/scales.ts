@@ -5,11 +5,12 @@ import { MoeomSpec } from '../spec'
 
 const buildScales: BuildScalesFunction =
     (spec: MoeomSpec): Scale[] => {
-        // @ts-ignore
         const pitchScalars: Scalar[] =
-            generateOctaveRepeatingScalars(buildEqualDivisionScalars(spec.equalDivision)
-                .map(to.Frequency))
-                .map(from.Frequency)
+            generateOctaveRepeatingScalars(
+                buildEqualDivisionScalars(spec.equalDivision)
+                    .map(to.Frequency),
+            )
+                .map<Scalar>(from.Frequency)
 
         return buildStandardScales(spec, { pitchScalars })
     }

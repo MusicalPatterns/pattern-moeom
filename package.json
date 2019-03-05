@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/pattern-moeom",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
