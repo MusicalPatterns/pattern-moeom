@@ -25,7 +25,7 @@ const pattern: Pattern<MoeomSpec> = {
     specData,
 }
 
-const patterns: Patterns = {
+const patterns: Partial<Patterns> = {
     [ pattern.id ]: pattern,
 }
 
