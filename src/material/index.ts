@@ -1,2 +1,2 @@
-export { buildScales } from './scales'
-export { buildEntities } from './entities'
+export { materializeScales } from './scales'
+export { materializeEntities } from './entities'

@@ -1,22 +1,17 @@
-import { NoteSpec } from '@musical-patterns/compiler'
-import { PitchOnly, STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/pattern'
-import { Amplitude, ContourElement, from, Scalar, to } from '@musical-patterns/utilities'
-import { REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD } from './constants'
+import { Note } from '@musical-patterns/compiler'
+import { PitchOnly } from '@musical-patterns/pattern'
+import { ContourWhole } from '@musical-patterns/utilities'
+import { MoeomSpec } from '../spec'
+import { buildNote } from './features'
+import { moeomWhole } from './wholes'
 
-const buildNoteSpec: (contourElement: ContourElement<PitchOnly>) => NoteSpec =
-    ([ pitch ]: ContourElement<PitchOnly>): NoteSpec => ({
-        durationSpec: {
-            scaleIndex: STANDARD_DURATIONS_SCALE_INDEX,
-        },
-        gainSpec: {
-            scalar: from.Amplitude<Scalar, Scalar<Amplitude>>(REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD),
-        },
-        pitchSpec: {
-            index: to.Ordinal(pitch),
-            scaleIndex: STANDARD_PITCH_SCALE_INDEX,
-        },
-    })
+const buildNotes: (spec: MoeomSpec) => Note[] =
+    (spec: MoeomSpec): Note[] => {
+        const whole: ContourWhole<PitchOnly> = moeomWhole(spec)
+
+        return whole.map(buildNote)
+    }
 
 export {
-    buildNoteSpec,
+    buildNotes,
 }

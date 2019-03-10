@@ -1,27 +1,27 @@
-import { Entity, NoteSpec, TimbreNameEnum } from '@musical-patterns/compiler'
+import { Entity, Note, TimbreNameEnum } from '@musical-patterns/compiler'
 import { PitchCircularTechnique, pitchCirculate } from '@musical-patterns/pattern'
 import { from, to } from '@musical-patterns/utilities'
 import { MoeomSpec } from '../spec'
-import { buildPart } from './parts'
+import { buildNotes } from './notes'
 
-const buildEntities: (spec: MoeomSpec) => Entity[] =
+const materializeEntities: (spec: MoeomSpec) => Entity[] =
     (spec: MoeomSpec): Entity[] => {
-        const part: NoteSpec[] = buildPart(spec)
+        const notes: Note[] = buildNotes(spec)
 
-        const parts: NoteSpec[][] = pitchCirculate(
-            part,
+        const notesForEntities: Note[][] = pitchCirculate(
+            notes,
             {
                 pitchClassCount: to.Cardinal(from.Denominator(spec.equalDivision)),
                 technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
             },
         )
 
-        return parts.map((noteSpecs: NoteSpec[]): Entity => ({
-            noteSpecs,
+        return notesForEntities.map((notesForEntity: Note[]): Entity => ({
+            notes: notesForEntity,
             timbreName: TimbreNameEnum.TROMBONE,
         }))
     }
 
 export {
-    buildEntities,
+    materializeEntities,
 }

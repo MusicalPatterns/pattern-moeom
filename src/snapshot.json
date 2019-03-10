@@ -1,6 +1,6 @@
 [
   {
-    "notes": [
+    "sounds": [
       {
         "duration": 240,
         "gain": 0.00278,
@@ -794,13 +794,13 @@
         "sustain": 239.9
       }
     ],
-    "voiceSpec": {
+    "sourceRequest": {
       "timbreName": "TROMBONE",
-      "voiceType": "SAMPLE"
+      "sourceType": "SAMPLE"
     }
   },
   {
-    "notes": [
+    "sounds": [
       {
         "duration": 240,
         "gain": 0.15163,
@@ -1594,13 +1594,13 @@
         "sustain": 239.9
       }
     ],
-    "voiceSpec": {
+    "sourceRequest": {
       "timbreName": "TROMBONE",
-      "voiceType": "SAMPLE"
+      "sourceType": "SAMPLE"
     }
   },
   {
-    "notes": [
+    "sounds": [
       {
         "duration": 240,
         "gain": 0.15163,
@@ -2394,9 +2394,9 @@
         "sustain": 239.9
       }
     ],
-    "voiceSpec": {
+    "sourceRequest": {
       "timbreName": "TROMBONE",
-      "voiceType": "SAMPLE"
+      "sourceType": "SAMPLE"
     }
   }
 ]
