@@ -1,9 +1,9 @@
 import {
-    SpecData,
-    SpecPropertyType,
+    Data,
+    PropertyType,
+    standardAttributes,
     standardInitialSpec,
-    standardSpecAttributes,
-    StandardSpecProperties,
+    StandardProperty,
 } from '@musical-patterns/pattern'
 import {
     MOEOM_INITIAL_BASE_DURATION,
@@ -11,35 +11,35 @@ import {
     MOEOM_INITIAL_EQUAL_DIVISION,
     MOEOM_INITIAL_FLIPPED,
 } from './constants'
-import { MoeomSpec, MoeomSpecAttributes } from './types'
+import { MoeomAttributes, MoeomSpec } from './types'
 
 const initial: MoeomSpec = {
     ...standardInitialSpec,
     equalDivision: MOEOM_INITIAL_EQUAL_DIVISION,
     flipped: MOEOM_INITIAL_FLIPPED,
-    [ StandardSpecProperties.BASE_DURATION ]: MOEOM_INITIAL_BASE_DURATION,
-    [ StandardSpecProperties.BASE_FREQUENCY ]: MOEOM_INITIAL_BASE_FREQUENCY,
+    [ StandardProperty.BASE_DURATION ]: MOEOM_INITIAL_BASE_DURATION,
+    [ StandardProperty.BASE_FREQUENCY ]: MOEOM_INITIAL_BASE_FREQUENCY,
 }
 
-const attributes: MoeomSpecAttributes = {
-    ...standardSpecAttributes,
+const attributes: MoeomAttributes = {
+    ...standardAttributes,
     equalDivision: {
         constraint: {
             integer: true,
             min: 1,
         },
-        specPropertyType: SpecPropertyType.RANGED,
+        propertyType: PropertyType.RANGED,
     },
     flipped: {
-        specPropertyType: SpecPropertyType.TOGGLED,
+        propertyType: PropertyType.TOGGLED,
     },
 }
 
-const specData: SpecData<MoeomSpec> = {
+const data: Data<MoeomSpec> = {
     attributes,
     initial,
 }
 
 export {
-    specData,
+    data,
 }

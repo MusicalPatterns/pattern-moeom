@@ -1,3 +1,3 @@
-export { specData } from './data'
+export { data } from './data'
 
 export { MoeomSpec } from './types'
