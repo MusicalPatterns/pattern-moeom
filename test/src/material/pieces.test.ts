@@ -3,7 +3,7 @@ import { to } from '@musical-patterns/utilities'
 import { moeomPiece } from '../../../src/indexForTest'
 
 describe('contour pieces', () => {
-    it('a piece, given a step, will generate a three-element block, starting at zero, each next element up a step from the previous', () => {
+    it('a piece, given a step, will compute a three-element block, starting at zero, each next element up a step from the previous', () => {
         expect(moeomPiece({ equalDivisionStep: to.Numerator(0), flipped: false }))
             .toEqual(to.ContourPiece<PitchOnly>([ [ 0 ], [ 0 ], [ 0 ] ]))
         expect(moeomPiece({ equalDivisionStep: to.Numerator(1), flipped: false }))

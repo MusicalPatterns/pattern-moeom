@@ -2,11 +2,11 @@ import { Entity, Note, TimbreNameEnum } from '@musical-patterns/compiler'
 import { PitchCircularTechnique, pitchCirculate } from '@musical-patterns/pattern'
 import { from, to } from '@musical-patterns/utilities'
 import { MoeomSpec } from '../spec'
-import { buildNotes } from './notes'
+import { computeNotes } from './notes'
 
 const materializeEntities: (spec: MoeomSpec) => Entity[] =
     (spec: MoeomSpec): Entity[] => {
-        const notes: Note[] = buildNotes(spec)
+        const notes: Note[] = computeNotes(spec)
 
         const notesForEntities: Note[][] = pitchCirculate(
             notes,
