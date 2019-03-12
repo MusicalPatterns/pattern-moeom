@@ -9,11 +9,11 @@ import {
     to,
     zeroAndPositiveIntegers,
 } from '@musical-patterns/utilities'
-import { MoeomSpec } from '../spec'
+import { MoeomSpecs } from '../spec'
 import { moeomPiece } from './pieces'
 
-const moeomWhole: (spec: MoeomSpec) => ContourWhole<PitchOnly> =
-    ({ equalDivision, flipped }: MoeomSpec): ContourWhole<PitchOnly> =>
+const moeomWhole: (specs: MoeomSpecs) => ContourWhole<PitchOnly> =
+    ({ equalDivision, flipped }: MoeomSpecs): ContourWhole<PitchOnly> =>
         slice(zeroAndPositiveIntegers, INITIAL, to.Ordinal(from.Denominator(equalDivision)))
             .map(to.Numerator)
             .reduce(

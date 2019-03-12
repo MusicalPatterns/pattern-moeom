@@ -1,22 +1,22 @@
 import {
-    Attributes,
-    RangedPropertyAttributes,
-    Spec,
-    ToggledPropertyAttributes,
+    Configurations,
+    RangedConfiguration,
+    Specs,
+    ToggledConfiguration,
 } from '@musical-patterns/pattern'
 import { Denominator } from '@musical-patterns/utilities'
 
-interface MoeomSpec extends Spec {
+interface MoeomSpecs extends Specs {
     equalDivision: Denominator,
     flipped: boolean,
 }
 
-interface MoeomAttributes extends Attributes<MoeomSpec> {
-    equalDivision: RangedPropertyAttributes,
-    flipped: ToggledPropertyAttributes,
+interface MoeomConfigurations extends Configurations<MoeomSpecs> {
+    equalDivision: RangedConfiguration,
+    flipped: ToggledConfiguration,
 }
 
 export {
-    MoeomSpec,
-    MoeomAttributes,
+    MoeomSpecs,
+    MoeomConfigurations,
 }
