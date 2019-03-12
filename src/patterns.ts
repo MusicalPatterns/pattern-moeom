@@ -1,22 +1,7 @@
-import { Material } from '@musical-patterns/compiler'
-import { Id, Metadata, Pattern, Patterns } from '@musical-patterns/pattern'
-import { materializeEntities, materializeScales } from './material'
-import { post } from './metadata'
+import { Id, Pattern, Patterns } from '@musical-patterns/pattern'
+import { material } from './material'
+import { metadata } from './metadata'
 import { MoeomSpecs, spec } from './spec'
-
-const material: Material = {
-    materializeEntities,
-    materializeScales,
-}
-
-const metadata: Metadata = {
-    description: post,
-    formattedName: 'Moeom',
-    mostRecentPublish: process.env.PUBLISH_DATE || '2018-10-31T07:00:00.000Z',
-    musicalIdeaIllustrated: 'when step sizes increase in pitch circular space, eventually harmonic direction flips',
-    originalPublish: '2018-10-31T07:00:00.000Z',
-    version: process.env.PATTERN_VERSION || 'unknown',
-}
 
 const pattern: Pattern<MoeomSpecs> = {
     id: Id.MOEOM,

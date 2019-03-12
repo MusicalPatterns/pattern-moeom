@@ -1,2 +1,1 @@
-export { materializeScales } from './scales'
-export { materializeEntities } from './entities'
+export { material } from './materials'
