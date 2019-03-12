@@ -1,6 +1,12 @@
 import { MaterializeScales, Scale } from '@musical-patterns/compiler'
-import { computeOctaveRepeatingScalars, materializeStandardScales } from '@musical-patterns/pattern'
-import { computeEqualDivisionScalars, from, Scalar, to } from '@musical-patterns/utilities'
+import { materializeStandardScales } from '@musical-patterns/pattern'
+import {
+    computeEqualDivisionScalars,
+    computeOctaveRepeatingScalars,
+    from,
+    Scalar,
+    to,
+} from '@musical-patterns/utilities'
 import { MoeomSpecs } from '../spec'
 
 const materializeScales: MaterializeScales =
