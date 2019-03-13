@@ -7,7 +7,7 @@ import {
 } from './constants'
 import { MoeomConfigurations, MoeomSpecs } from './types'
 
-const initial: MoeomSpecs = {
+const initialSpecs: MoeomSpecs = {
     ...standardInitialSpecs,
     equalDivision: MOEOM_INITIAL_EQUAL_DIVISION,
     flipped: MOEOM_INITIAL_FLIPPED,
@@ -31,7 +31,7 @@ const configurations: MoeomConfigurations = {
 
 const spec: Spec<MoeomSpecs> = {
     configurations,
-    initial,
+    initialSpecs,
 }
 
 export {
