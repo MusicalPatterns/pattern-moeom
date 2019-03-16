@@ -18,10 +18,10 @@ const moeomWhole: (specs: MoeomSpecs) => ContourWhole<PitchOnly> =
             .map(to.Numerator)
             .reduce(
                 (accumulator: ContourWhole<PitchOnly>, equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>
-                    to.ContourWhole<PitchOnly>(sequence([
+                    to.ContourWhole<PitchOnly>(sequence(
                         accumulator,
                         moeomPiece({ equalDivisionStep, flipped }),
-                    ])),
+                    )),
                 to.ContourWhole<PitchOnly>([]),
             )
 
