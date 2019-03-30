@@ -8,7 +8,7 @@ const materializeEntities: (specs: MoeomSpecs) => Entity[] =
     (specs: MoeomSpecs): Entity[] => {
         const notes: Note[] = computeNotes(specs)
 
-        const notesForEntities: Note[][] = pitchCirculate(
+        const entitiesNotes: Note[][] = pitchCirculate(
             notes,
             {
                 pitchClassCount: to.Cardinal(from.Denominator(specs.equalDivision)),
@@ -16,8 +16,8 @@ const materializeEntities: (specs: MoeomSpecs) => Entity[] =
             },
         )
 
-        return notesForEntities.map((notesForEntity: Note[]): Entity => ({
-            notes: notesForEntity,
+        return entitiesNotes.map((entityNotes: Note[]): Entity => ({
+            sections: [ { notes: entityNotes } ],
             timbreName: TimbreNameEnum.TROMBONE,
         }))
     }
