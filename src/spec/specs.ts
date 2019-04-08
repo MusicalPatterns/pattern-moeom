@@ -1,4 +1,4 @@
-import { InputType, Spec, standardConfigurations, standardInitialSpecs, StandardSpec } from '@musical-patterns/pattern'
+import { InputType, Spec, standardConfigurations, standardInitialSpecs, StandardSpec } from '@musical-patterns/spec'
 import {
     MOEOM_INITIAL_BASE_DURATION,
     MOEOM_INITIAL_BASE_FREQUENCY,

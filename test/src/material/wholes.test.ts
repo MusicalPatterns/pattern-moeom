@@ -1,4 +1,4 @@
-import { PitchOnly } from '@musical-patterns/pattern'
+import { PitchOnly } from '@musical-patterns/material'
 import { to } from '@musical-patterns/utilities'
 import { moeomWhole } from '../../../src/indexForTest'
 

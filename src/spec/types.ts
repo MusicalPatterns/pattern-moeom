@@ -3,7 +3,7 @@ import {
     RangedConfiguration,
     StandardSpecs,
     ToggledConfiguration,
-} from '@musical-patterns/pattern'
+} from '@musical-patterns/spec'
 import { Denominator } from '@musical-patterns/utilities'
 
 interface MoeomSpecs extends StandardSpecs {

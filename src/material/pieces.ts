@@ -1,4 +1,4 @@
-import { PitchOnly } from '@musical-patterns/pattern'
+import { PitchOnly } from '@musical-patterns/material'
 import { apply, ContourWhole, from, Numerator, to, TWICE } from '@musical-patterns/utilities'
 
 const moeomPiece:

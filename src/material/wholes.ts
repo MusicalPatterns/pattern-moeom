@@ -1,4 +1,4 @@
-import { PitchOnly } from '@musical-patterns/pattern'
+import { PitchOnly } from '@musical-patterns/material'
 import {
     ContourWhole,
     from,

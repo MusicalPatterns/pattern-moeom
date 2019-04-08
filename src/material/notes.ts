@@ -1,5 +1,4 @@
-import { Note } from '@musical-patterns/material'
-import { PitchOnly } from '@musical-patterns/pattern'
+import { Note, PitchOnly } from '@musical-patterns/material'
 import { ContourWhole } from '@musical-patterns/utilities'
 import { MoeomSpecs } from '../spec'
 import { computeNote } from './features'
