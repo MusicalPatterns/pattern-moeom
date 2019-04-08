@@ -1,4 +1,4 @@
-import { Note } from '@musical-patterns/compiler'
+import { Note } from '@musical-patterns/material'
 import { PitchOnly, STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/pattern'
 import { Amplitude, ContourElement, from, Scalar, to } from '@musical-patterns/utilities'
 import { REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD } from './constants'

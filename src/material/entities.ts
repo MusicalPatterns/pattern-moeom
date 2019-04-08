@@ -1,4 +1,4 @@
-import { Entity, Note, TimbreNameEnum } from '@musical-patterns/compiler'
+import { Entity, Note, TimbreNameEnum } from '@musical-patterns/material'
 import { PitchCircularTechnique, pitchCirculate } from '@musical-patterns/pattern'
 import { from, to } from '@musical-patterns/utilities'
 import { MoeomSpecs } from '../spec'
