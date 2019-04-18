@@ -1,5 +1,5 @@
 import { Note, PitchOnly, STANDARD_DURATIONS_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/material'
-import { Amplitude, ContourElement, from, Scalar, to } from '@musical-patterns/utilities'
+import { ContourElement, Scalar, to } from '@musical-patterns/utilities'
 import { REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD } from './constants'
 
 const computeNote: (contourElement: ContourElement<PitchOnly>) => Note =
@@ -8,10 +8,10 @@ const computeNote: (contourElement: ContourElement<PitchOnly>) => Note =
             scaleIndex: STANDARD_DURATIONS_SCALE_INDEX,
         },
         gain: {
-            scalar: from.Amplitude<Scalar, Scalar<Amplitude>>(REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD),
+            scalar: REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD,
         },
         pitch: {
-            index: to.Ordinal(pitch),
+            index: to.Ordinal<Scalar>(pitch),
             scaleIndex: STANDARD_PITCH_SCALE_INDEX,
         },
     })

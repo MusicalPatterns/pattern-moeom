@@ -1,21 +1,13 @@
 import { MaterializeScales, materializeStandardScales, Scale } from '@musical-patterns/material'
-import {
-    computeEqualDivisionScalars,
-    computeOctaveRepeatingScalars,
-    from,
-    Scalar,
-    to,
-} from '@musical-patterns/utilities'
+import { computeEqualDivisionScalars, computeOctaveRepeatingScalars, Hz, Scalar } from '@musical-patterns/utilities'
 import { MoeomSpecs } from '../spec'
 
 const materializeScales: MaterializeScales =
     (specs: MoeomSpecs): Scale[] => {
-        const pitchScalars: Scalar[] =
+        const pitchScalars: Array<Scalar<Hz>> =
             computeOctaveRepeatingScalars(
-                computeEqualDivisionScalars(specs.equalDivision)
-                    .map(to.Frequency),
+                computeEqualDivisionScalars(specs.equalDivision),
             )
-                .map<Scalar>(from.Frequency)
 
         return materializeStandardScales(specs, { pitchScalars })
     }

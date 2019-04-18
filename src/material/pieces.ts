@@ -7,7 +7,10 @@ const moeomPiece:
         to.ContourWhole<PitchOnly>([
             [ 0 ],
             [ (flipped ? -1 : 1) * from.Numerator(equalDivisionStep) ],
-            [ (flipped ? -1 : 1) * from.Numerator(apply.Scalar(equalDivisionStep, to.Scalar(from.Cardinal(TWICE)))) ],
+            [ (flipped ? -1 : 1) * from.Numerator(apply.Scalar(
+                equalDivisionStep,
+                to.Scalar<Numerator>(from.Cardinal(TWICE)),
+            )) ],
         ])
 
 export {
