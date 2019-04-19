@@ -1,9 +1,4 @@
-import {
-    Configurations,
-    RangedConfiguration,
-    StandardSpecs,
-    ToggledConfiguration,
-} from '@musical-patterns/spec'
+import { Configurations, RangedConfiguration, StandardSpecs, ToggledConfiguration } from '@musical-patterns/spec'
 import { Denominator } from '@musical-patterns/utilities'
 
 interface MoeomSpecs extends StandardSpecs {
