@@ -1,5 +1,5 @@
 import { Entity, Note, PitchCircularTechnique, pitchCirculate, TimbreNameEnum } from '@musical-patterns/material'
-import { from, to } from '@musical-patterns/utilities'
+import { as, notAs } from '@musical-patterns/utilities'
 import { MoeomSpecs } from '../spec'
 import { computeNotes } from './notes'
 
@@ -10,7 +10,7 @@ const materializeEntities: (specs: MoeomSpecs) => Entity[] =
         const entitiesNotes: Note[][] = pitchCirculate(
             notes,
             {
-                pitchClassCount: to.Cardinal(from.Denominator(specs.equalDivision)),
+                pitchClassCount: as.Cardinal(notAs.Denominator(specs.equalDivision)),
                 technique: PitchCircularTechnique.INDEX_TRANSLATION_BY_PITCH_CLASS_COUNT,
             },
         )

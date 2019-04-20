@@ -1,15 +1,15 @@
 import { PitchOnly } from '@musical-patterns/material'
-import { apply, ContourWhole, from, Numerator, to, TWICE } from '@musical-patterns/utilities'
+import { as, ContourWhole, notAs, Numerator, TWICE, use } from '@musical-patterns/utilities'
 
 const moeomPiece:
     ({ equalDivisionStep, flipped }: { equalDivisionStep: Numerator, flipped: boolean }) => ContourWhole<PitchOnly> =
     ({ equalDivisionStep, flipped }: { equalDivisionStep: Numerator, flipped: boolean }): ContourWhole<PitchOnly> =>
-        to.ContourWhole<PitchOnly>([
+        as.ContourWhole<PitchOnly>([
             [ 0 ],
-            [ (flipped ? -1 : 1) * from.Numerator(equalDivisionStep) ],
-            [ (flipped ? -1 : 1) * from.Numerator(apply.Multiple(
+            [ (flipped ? -1 : 1) * notAs.Numerator(equalDivisionStep) ],
+            [ (flipped ? -1 : 1) * notAs.Numerator(use.Multiple(
                 equalDivisionStep,
-                to.Multiple<Numerator>(from.Cardinal(TWICE)),
+                as.Multiple<Numerator>(notAs.Cardinal(TWICE)),
             )) ],
         ])
 
