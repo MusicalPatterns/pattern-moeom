@@ -11,7 +11,7 @@ const computeNote: (contourElement: ContourElement<PitchOnly>) => Note =
             scalar: REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD,
         },
         pitch: {
-            index: as.Ordinal<Scalar>(pitch),
+            index: as.Ordinal<Scalar[]>(pitch),
             scaleIndex: STANDARD_PITCH_SCALE_INDEX,
         },
     })
