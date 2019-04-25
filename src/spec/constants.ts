@@ -1,10 +1,10 @@
 // tslint:disable no-magic-numbers
 
-import { as, Denominator, Duration, Hz, Ms, Pitch, Point } from '@musical-patterns/utilities'
+import { as, Delta, Denominator, Duration, Hz, Ms, Pitch } from '@musical-patterns/utilities'
 
 const MOEOM_INITIAL_EQUAL_DIVISION: Denominator = as.Denominator(24)
 const MOEOM_INITIAL_FLIPPED: boolean = false
-const MOEOM_INITIAL_BASIS_DURATION: Duration = as.Translation<Point<Ms>>(240)
+const MOEOM_INITIAL_BASIS_DURATION: Duration = as.Delta<Ms>(240)
 const MOEOM_INITIAL_BASIS_FREQUENCY: Pitch = as.Point<Hz>(240)
 
 export {
