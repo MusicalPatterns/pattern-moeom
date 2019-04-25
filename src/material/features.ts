@@ -1,6 +1,11 @@
-import { Note, PitchOnly, STANDARD_DURATION_SCALE_INDEX, STANDARD_PITCH_SCALE_INDEX } from '@musical-patterns/material'
+import {
+    Note,
+    PitchOnly,
+    REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD,
+    STANDARD_DURATION_SCALE_INDEX,
+    STANDARD_PITCH_SCALE_INDEX,
+} from '@musical-patterns/material'
 import { as, ContourElement, Pitch, Scalar } from '@musical-patterns/utilities'
-import { REDUCE_GAIN_BECAUSE_SAMPLES_ARE_SUPER_LOUD } from './constants'
 
 const computeNote: (contourElement: ContourElement<PitchOnly>) => Note =
     ([ pitch ]: ContourElement<PitchOnly>): Note => ({
