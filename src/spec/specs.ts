@@ -1,7 +1,7 @@
 import { InputType, Spec, standardConfigurations, standardInitialSpecs, StandardSpec } from '@musical-patterns/spec'
 import {
-    MOEOM_INITIAL_BASE_DURATION,
-    MOEOM_INITIAL_BASE_FREQUENCY,
+    MOEOM_INITIAL_BASIS_DURATION,
+    MOEOM_INITIAL_BASIS_FREQUENCY,
     MOEOM_INITIAL_EQUAL_DIVISION,
     MOEOM_INITIAL_FLIPPED,
 } from './constants'
@@ -11,8 +11,8 @@ const initialSpecs: MoeomSpecs = {
     ...standardInitialSpecs,
     equalDivision: MOEOM_INITIAL_EQUAL_DIVISION,
     flipped: MOEOM_INITIAL_FLIPPED,
-    [ StandardSpec.BASE_DURATION ]: MOEOM_INITIAL_BASE_DURATION,
-    [ StandardSpec.BASE_FREQUENCY ]: MOEOM_INITIAL_BASE_FREQUENCY,
+    [ StandardSpec.BASIS_DURATION ]: MOEOM_INITIAL_BASIS_DURATION,
+    [ StandardSpec.BASIS_FREQUENCY ]: MOEOM_INITIAL_BASIS_FREQUENCY,
 }
 
 const configurations: MoeomConfigurations = {
