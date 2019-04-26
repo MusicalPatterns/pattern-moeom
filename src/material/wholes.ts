@@ -3,7 +3,7 @@ import {
     as,
     ContourWhole,
     INITIAL,
-    notAs,
+
     Numerator,
     sequence,
     slice,
@@ -14,7 +14,7 @@ import { moeomPiece } from './pieces'
 
 const moeomWhole: (specs: MoeomSpecs) => ContourWhole<PitchOnly> =
     ({ equalDivision, flipped }: MoeomSpecs): ContourWhole<PitchOnly> =>
-        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal(notAs.Denominator(equalDivision)))
+        slice(ZERO_AND_POSITIVE_INTEGERS, INITIAL, as.Ordinal(as.number(equalDivision)))
             .map(as.Numerator)
             .reduce(
                 (accumulator: ContourWhole<PitchOnly>, equalDivisionStep: Numerator): ContourWhole<PitchOnly> =>
