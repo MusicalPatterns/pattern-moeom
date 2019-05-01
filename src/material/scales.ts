@@ -1,4 +1,4 @@
-import { MaterializeScales, materializeStandardScales, Scale } from '@musical-patterns/material'
+import { MaterializeScales, materializeStandardScales, Scales } from '@musical-patterns/material'
 import {
     computeEqualDivisionPitchScalars,
     computeOctaveRepeatingPitchScalars,
@@ -8,7 +8,7 @@ import {
 import { MoeomSpecs } from '../spec'
 
 const materializeScales: MaterializeScales =
-    (specs: MoeomSpecs): Scale[] => {
+    (specs: MoeomSpecs): Scales => {
         const pitchScalars: Array<Scalar<Pitch>> =
             computeOctaveRepeatingPitchScalars(
                 computeEqualDivisionPitchScalars(specs.equalDivision),
