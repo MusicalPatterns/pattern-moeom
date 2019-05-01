@@ -1,5 +1,5 @@
 import { PitchOnly } from '@musical-patterns/material'
-import { as, ContourWhole,  Numerator, TWICE, use } from '@musical-patterns/utilities'
+import { as, ContourWhole, Numerator, TWICE, use } from '@musical-patterns/utilities'
 
 const moeomPiece:
     ({ equalDivisionStep, flipped }: { equalDivisionStep: Numerator, flipped: boolean }) => ContourWhole<PitchOnly> =
