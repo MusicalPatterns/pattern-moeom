@@ -9,15 +9,15 @@
     "url": "https://github.com/MusicalPatterns/pattern-moeom.git"
   },
   "dependencies": {
-    "@musical-patterns/id": "^1.0.8",
+    "@musical-patterns/id": "^1.0.10",
     "@musical-patterns/material": "^1.0.106",
-    "@musical-patterns/metadata": "^1.0.10",
+    "@musical-patterns/metadata": "^1.0.13",
     "@musical-patterns/pattern": "^1.0.265",
     "@musical-patterns/spec": "^1.0.37",
-    "@musical-patterns/utilities": "^1.0.586"
+    "@musical-patterns/utilities": "^1.0.589"
   },
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.564",
+    "@musical-patterns/cli": "^1.0.567",
     "@musical-patterns/playroom": "^1.0.409"
   }
 }
