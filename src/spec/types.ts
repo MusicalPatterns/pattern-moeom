@@ -1,7 +1,7 @@
-import { Configurations, RangedConfiguration, StandardSpecs, ToggledConfiguration } from '@musical-patterns/spec'
+import { Configurations, RangedConfiguration, Specs, ToggledConfiguration } from '@musical-patterns/spec'
 import { Denominator } from '@musical-patterns/utilities'
 
-interface MoeomSpecs extends StandardSpecs {
+interface MoeomSpecs extends Specs {
     equalDivision: Denominator,
     flipped: boolean,
 }
