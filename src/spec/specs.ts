@@ -21,6 +21,7 @@ const configurations: MoeomConfigurations = {
         constraint: {
             integer: true,
             min: 1,
+            required: true,
         },
         inputType: InputType.RANGED,
     },

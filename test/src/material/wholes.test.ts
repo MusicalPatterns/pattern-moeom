@@ -2,8 +2,8 @@ import { PitchOnly } from '@musical-patterns/material'
 import { as } from '@musical-patterns/utilities'
 import { moeomWhole } from '../../../src/indexForTest'
 
-describe('contour wholes', () => {
-    it('a whole sequences blocks [together], one block for each step', () => {
+describe('contour wholes', (): void => {
+    it('a whole sequences blocks [together], one block for each step', (): void => {
         expect(moeomWhole({ equalDivision: as.Denominator(12), flipped: false }))
             .toEqual(as.ContourWhole<PitchOnly>([
                 [ 0 ], [ 0 ], [ 0 ],
