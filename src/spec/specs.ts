@@ -5,12 +5,13 @@ import {
     MOEOM_INITIAL_HZ_PHYSICALIZATION,
     MOEOM_INITIAL_MS_PHYSICALIZATION,
 } from './constants'
-import { MoeomConfigurations, MoeomSpecs } from './types'
+import { MoeomConfigurations, MoeomSpec, MoeomSpecs } from './types'
 
+// @ts-ignore
 const initialSpecs: MoeomSpecs = {
     ...standardInitialSpecs,
-    equalDivision: MOEOM_INITIAL_EQUAL_DIVISION,
-    flipped: MOEOM_INITIAL_FLIPPED,
+    [ MoeomSpec.EQUAL_DIVISION ]: MOEOM_INITIAL_EQUAL_DIVISION,
+    [ MoeomSpec.FLIPPED ]: MOEOM_INITIAL_FLIPPED,
     [ StandardSpec.MS_PHYSICALIZATION ]: MOEOM_INITIAL_MS_PHYSICALIZATION,
     [ StandardSpec.HZ_PHYSICALIZATION ]: MOEOM_INITIAL_HZ_PHYSICALIZATION,
 }

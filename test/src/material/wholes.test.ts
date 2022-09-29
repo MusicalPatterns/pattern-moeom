@@ -4,6 +4,7 @@ import { moeomWhole } from '../../../src/indexForTest'
 
 describe('contour wholes', (): void => {
     it('a whole sequences blocks [together], one block for each step', (): void => {
+        // @ts-ignore
         expect(moeomWhole({ equalDivision: as.Denominator(12), flipped: false }))
             .toEqual(as.ContourWhole<PitchOnly>([
                 [ 0 ], [ 0 ], [ 0 ],
@@ -20,6 +21,7 @@ describe('contour wholes', (): void => {
                 [ 0 ], [ 11 ], [ 22 ],
             ]))
 
+        // @ts-ignore
         expect(moeomWhole({ equalDivision: as.Denominator(4), flipped: false }))
             .toEqual(as.ContourWhole<PitchOnly>([
                 [ 0 ], [ 0 ], [ 0 ],
