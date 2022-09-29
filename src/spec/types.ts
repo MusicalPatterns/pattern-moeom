@@ -7,7 +7,6 @@ enum MoeomSpec {
 }
 
 interface MoeomSpecs extends Specs {
-    // @ts-ignore
     [ MoeomSpec.EQUAL_DIVISION ]: Denominator,
     [ MoeomSpec.FLIPPED ]: boolean,
 }

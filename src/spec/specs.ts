@@ -7,7 +7,6 @@ import {
 } from './constants'
 import { MoeomConfigurations, MoeomSpec, MoeomSpecs } from './types'
 
-// @ts-ignore
 const initialSpecs: MoeomSpecs = {
     ...standardInitialSpecs,
     [ MoeomSpec.EQUAL_DIVISION ]: MOEOM_INITIAL_EQUAL_DIVISION,
